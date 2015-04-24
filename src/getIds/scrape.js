@@ -53,6 +53,7 @@ function print() {
 
 function save() {
   for (var id in ids) {
+    // TODO: Delete file before appending
     fs.write('downloads/ids.txt', ids[id] + '\n', 'a');
   }
 }

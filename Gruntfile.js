@@ -8,7 +8,7 @@ module.exports = function(grunt) {
         command: 'casperjs src/getIds/scrape.js'
       },
       download: {
-        command: 'casperjs src/download/scrape.py'
+        command: 'python src/download/scrape.py'
       }
     }
   });
