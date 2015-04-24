@@ -4,14 +4,18 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     shell: {
-      scrape: {
-        command: 'casperjs src/download.js'
+      getIds: {
+        command: 'casperjs src/getIds/scrape.js'
+      },
+      download: {
+        command: 'casperjs src/download/scrape.py'
       }
     }
   });
 
   grunt.registerTask('default', [
-    'shell:scrape'
+    'shell:getIds',
+    'shell:download'
   ]);
 
 };

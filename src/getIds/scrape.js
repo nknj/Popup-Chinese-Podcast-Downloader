@@ -18,13 +18,13 @@ var ids = [];
 // Main
 for (var i = startPage; i < endPage; i++) {
   if (i === startPage) {
-    casper.start(url + i, addToResults);
+    casper.start(url + i, addToList);
   } else {
-    casper.thenOpen(url + i, addToResults);
+    casper.thenOpen(url + i, addToList);
   }
 }
 casper.then(print);
-casper.then(download);
+casper.then(save);
 casper.run();
 
 // Functions
@@ -39,7 +39,7 @@ function getIds() {
   return _ids;
 }
 
-function addToResults() {
+function addToList() {
   var _ids = this.evaluate(getIds);
   ids = ids.concat(_ids);
 }
@@ -51,9 +51,17 @@ function print() {
   this.echo('\n===================\n');
 }
 
-function download() {
+function save() {
   for (var id in ids) {
-    this.echo('Downloading ' + ids[id]);
-    this.download('http://popupchinese.com/data/' + ids[id] + '/audio.mp3', 'downloads/' + ids[id] + '.mp3');
+    fs.write('downloads/ids.txt', ids[id] + '\n', 'a');
   }
 }
+
+// Not using due to bug in Casper's download()
+// Ref: https://github.com/n1k0/casperjs/issues/73
+// function download() {
+//   for (var id in ids) {
+//     this.echo('Downloading ' + ids[id]);
+//     this.download('http://popupchinese.com/data/' + ids[id] + '/audio.mp3', 'downloads/' + ids[id] + '.mp3');
+//   }
+// }
