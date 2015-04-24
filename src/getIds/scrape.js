@@ -54,7 +54,7 @@ function print() {
 
 function save() {
   for (var id in ids) {
-    if (id === 0) {
+    if (id === '0') {
       fs.write('downloads/ids.txt', ids[id] + '\n', 'w');
     } else {
       fs.write('downloads/ids.txt', ids[id] + '\n', 'a');
