@@ -4,6 +4,9 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     shell: {
+      options: {
+        stderr: true
+      },
       getIds: {
         command: 'casperjs src/getIds/scrape.js'
       },

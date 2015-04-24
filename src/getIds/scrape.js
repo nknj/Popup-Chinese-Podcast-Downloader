@@ -5,14 +5,15 @@ var casper = require('casper').create({
     loadImages:  false,
     loadPlugins: false,
     webSecurityEnabled: false,
-    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4'
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) '+
+               'AppleWebKit/537.4 (KHTML, like Gecko) ' +
+               'Chrome/22.0.1229.94 Safari/537.4'
   }
 });
 
 // Vars
 var url = "http://popupchinese.com/lessons/absolute-beginners?page=";
-var startPage = 1;
-var endPage = 7;
+var startPage = 1, endPage = 7;
 var ids = [];
 
 // Main
@@ -53,8 +54,11 @@ function print() {
 
 function save() {
   for (var id in ids) {
-    // TODO: Delete file before appending
-    fs.write('downloads/ids.txt', ids[id] + '\n', 'a');
+    if (id === 0) {
+      fs.write('downloads/ids.txt', ids[id] + '\n', 'w');
+    } else {
+      fs.write('downloads/ids.txt', ids[id] + '\n', 'a');
+    }
   }
 }
 
@@ -63,6 +67,7 @@ function save() {
 // function download() {
 //   for (var id in ids) {
 //     this.echo('Downloading ' + ids[id]);
-//     this.download('http://popupchinese.com/data/' + ids[id] + '/audio.mp3', 'downloads/' + ids[id] + '.mp3');
+//     this.download('http://popupchinese.com/data/' + ids[id] + '/audio.mp3',
+//                   'downloads/' + ids[id] + '.mp3');
 //   }
 // }
