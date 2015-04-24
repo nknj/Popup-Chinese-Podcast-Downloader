@@ -5,7 +5,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     shell: {
       scrape: {
-        command: 'casperjs src/getIds.js'
+        command: 'casperjs src/download.js'
       }
     }
   });
